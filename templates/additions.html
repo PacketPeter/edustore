@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items to Inventory</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <a href="/home">Click Me To Go Back Home</a>
+    <div class="container">
+        <h1>Add Items to Inventory</h1>
+        <form action="/additions" method="POST">
+            <input id="part_name" type="text" name="part_name" placeholder="Part Name" required>
+            <ul id="results"></ul>
+            <input type="text" name="manufacturer" placeholder="Manufacturer"required>
+            <input type="text" name="purchase_order" placeholder="Purchase Order" required>
+            <input type="number" name="price" placeholder="Price Per Item" step=".01" required>
+            <input type="number" name="count" placeholder="Quantity" min="1"required>
+            <input type="submit" value="Submit">
+        </form>
+        <a id="invisible">{{ suggestions }}</a>
+    </div>
+
+</body>
+</html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(26, 26, 29)
+    }
+
+    a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        position: relative;
+        top: 2rem;
+    }
+
+    a:hover {
+        color: #ccc;
+    }
+
+    #invisible {
+        z-index: -1;
+        opacity: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    #results {
+        position: absolute;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1;
+        font-size: 1.5rem;
+    }
+
+    #results li:hover {
+        background-color: #ccc;
+        cursor: pointer;
+    }
+
+    h1 {
+        color: white;
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    input {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.5rem;
+    }
+
+</style>
+
+<script>
+    var suggestions = document.getElementsByTagName("a")[1].innerHTML;
+    suggestions = suggestions.replace(/'/g, "");
+    suggestions = suggestions.replace(/]/g, "");
+    suggestions = suggestions.replace(/\[/g, "");
+    suggestions = suggestions.split(", ");
+
+    const autocomplete = document.getElementById("part_name");
+
+    autocomplete.addEventListener("input", function(e) {
+        let val = this.value;
+        let results = document.getElementById("results");
+        results.innerHTML = "";
+        if (val.length > 0) {
+            for (let i = 0; i < suggestions.length; i++) {
+                if (suggestions[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    let li = document.createElement("li");
+                    li.innerHTML = suggestions[i];
+                    li.addEventListener("click", function(e) {
+                        autocomplete.value = this.innerHTML;
+                        results.innerHTML = "";
+                    });
+                    results.appendChild(li);
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduStore</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <nav>
+        <ul class="right-tabs">
+            <li><a href="/contact" id="nav-hover">Contact Us</a></li>
+            <li><a href="/login" id="nav-hover">Login</a></li>
+        </ul>
+
+        <ul class="left-tabs">
+            <li><a href="/"><img src="/static/logo.png"></a></li>
+            <li><a href="/">EduStore</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="left">
+            <h1 class="title">EduStore</h1>
+            <h2 class="subtitle">Inventory made simple</h2>
+            <p class="paragraph">EduStore is an extensive and secure inventory system made for the modern school district</p>
+
+            <h2 class="subtitle">Easily Track the Number of Items</h2>
+            <p class="paragraph">EduStore lets you easily see the current number of all items in inventory and quickly add more items when new shipments are received. Sort items by name and include purchase order numbers for better organization.</p>
+
+            <h2 class="subtitle">Manage User Access and Control</h2>
+            <p class="paragraph">Create and manage user and administrator accounts, allowing you to limit which users have access to remove, add, or edit items in inventory.</p>
+        </div>
+
+        <div class="right">
+            <img src="/static/logo.png">
+            <a href="/contact"><button><span></span>CONTACT US</button></a>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    leftTabs = document.querySelector(".left-tabs");
+    leftTabs.addEventListener("mouseover", function(e) {
+        leftTabs.style.cursor = "pointer";
+    });
+
+    leftTabs.addEventListener("click", function(e) {
+        window.location.href = "/";
+    });
+
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Montserrat;
+    }
+
+    body {
+        background-color: rgb(26, 26, 29);
+    }
+
+    nav {
+        width: 100vw;
+        height: 80px;
+        padding: 25px 0;
+    }
+
+    .right-tabs {
+        float: right;
+        margin-right: 50px;
+    }
+
+    .left-tabs {
+        float: left;
+        margin-left: 50px;
+    }
+
+    nav ul li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 25px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.2vw;
+        position: relative;
+    }
+
+    nav ul li img {
+        width: 5vw;
+        position: relative;
+        top: .5vw;
+    }
+
+    #nav-hover::after {
+        content: '';
+        height: 3px;
+        width: 0;
+        background-color:#06306c ;
+        position: absolute;
+        left: 0;
+        bottom:-10px ;
+        transition-duration:.5s ;
+    }
+
+    #nav-hover:hover::after {
+        width :100%;
+    }
+
+    .content {
+        width: 80vw;
+        height: 80vh;
+        margin: 0 auto;
+    }
+
+    .left {
+        width: 50%;
+        height: 100%;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        color: white;
+    }
+
+    .left .title {
+        font-size: 2.5vw;
+        color: white;
+        margin-top: -1.5vw;
+    }
+
+    .left .subtitle {
+        font-size: 1.5vw;
+        color: white;
+        margin-top: 1vw;
+    }
+
+    .left .paragraph {
+        font-size: 1vw;
+        color: white;
+    }
+
+    .right {
+        width: 50%;
+        height: 100%;
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .right img {
+        width: 60%;
+    }
+
+    button {
+        width: 24vw;
+        padding: 15px 0;
+        font-size: 1vw;
+        border-radius: 50px;
+        font-weight: bold;
+        border: 2px solid #06306c;
+        background-color: transparent;
+        color: #fff;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 2vw;
+    }
+
+    span {
+        background-color: #06306c;
+        height: 100%;
+        width: 0;
+        border-radius: 25px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        transition-duration: .5s;
+    }
+
+    button:hover span{
+        width: 100%;
+    }
+</style>

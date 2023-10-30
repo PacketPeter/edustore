@@ -1,0 +1,240 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduStore | Login</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <nav>
+        <ul class="right-tabs">
+            <li><a href="/contact" id="nav-hover">Contact Us</a></li>
+            <li><a href="/login" id="nav-hover">Login</a></li>
+        </ul>
+
+        <ul class="left-tabs">
+            <li><a href="/"><img src="/static/logo.png"></a></li>
+            <li><a href="/">EduStore</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Login</h1>
+        <h2 id="error">Incorrect username or password, please try again.</h2>
+        {% if error %}
+            <script>
+                document.getElementById("error").style.visibility = "visible";
+            </script>
+        {% endif %}
+        <form action="/login" method="POST">
+
+            <div class="input-field">
+                <input type="text" name="district_username" required>
+                <label>Enter your username</label>
+            </div>
+
+            <div class="input-field">
+                <input type="password" name="password" required>
+                <label>Enter your password</label>
+            </div>
+
+            <button type="submit"><span></span>Login</button>
+        </form>
+        <h2>Don't have an account? <a href="/contact">Contact us</a></h2>
+    </div>
+</body>
+</html>
+
+<script>
+    leftTabs = document.querySelector(".left-tabs");
+    leftTabs.addEventListener("mouseover", function(e) {
+        leftTabs.style.cursor = "pointer";
+    });
+
+    leftTabs.addEventListener("click", function(e) {
+        window.location.href = "/";
+    });
+
+    window.onload = function() {
+        // If the id error is in the html 
+    }
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Montserrat;
+    }
+
+    body {
+        background-color: rgb(26, 26, 29);
+    }
+
+    nav {
+        width: 100vw;
+        height: 80px;
+        padding: 25px 0;
+    }
+
+    .right-tabs {
+        float: right;
+        margin-right: 50px;
+    }
+
+    .left-tabs {
+        float: left;
+        margin-left: 50px;
+    }
+
+    nav ul li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 25px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.2vw;
+        position: relative;
+    }
+
+    nav ul li img {
+        width: 5vw;
+        position: relative;
+        top: .5vw;
+    }
+
+    #nav-hover::after {
+        content: '';
+        height: 3px;
+        width: 0;
+        background-color:#06306c ;
+        position: absolute;
+        left: 0;
+        bottom:-10px ;
+        transition-duration:.5s ;
+    }
+
+    #nav-hover:hover::after {
+        width: 100%;
+    }
+
+    .content {
+        width: 25vw;
+        height: 50vh;
+        border: 2px solid white;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .content h1 {
+        text-align: center;
+        padding-top: 2.5vw;
+        font-size: 2vw;
+        color: white;
+    }
+
+    .content h2 {
+        text-align: center;
+        font-size: 0.9vw;
+        padding-top: 0.75vw;
+        font-weight: 400;
+        color: white;
+        margin: 0 60px;
+    }
+
+    #error {
+        color: rgb(255, 129, 129);
+        margin-bottom: 0.75vw;
+        visibility: hidden;
+    }
+
+    .content h2 a {
+        color: white;
+        text-decoration: underline;
+    }
+
+    .content form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .input-field {
+        position: relative;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 2.5vw;
+    }
+
+    .input-field label {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 0.9vw;
+        pointer-events: none;
+        transition: 0.15s ease;
+    }
+
+    .input-field input {
+        color: #fff;
+        width: 100%;
+        height: 40px;
+        outline: none;
+        background: transparent;
+        border: none;
+        font-size: 0.9vw;
+    }
+
+    .input-field input:focus~label,
+    .input-field input:valid~label {
+        font-size: 0.65vw;
+        top: 10px;
+        transform: translateY(-120%);
+    }
+
+    button {
+        width: 100%;
+        padding: 15px 0;
+        font-size: 1vw;
+        border-radius: 50px;
+        font-weight: bold;
+        border: 2px solid #06306c;
+        background-color: transparent;
+        color: #fff;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0.5vw;
+        margin-bottom: 1.25vw;
+    }
+
+    span {
+        background-color: #06306c;
+        height: 100%;
+        width: 0;
+        border-radius: 25px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        transition-duration: .5s;
+    }
+
+    button:hover span{
+        width: 100%;
+    }
+</style>

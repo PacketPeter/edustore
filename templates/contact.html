@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduStore | Contact</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+
+<body>
+    <nav>
+        <ul class="right-tabs">
+            <li><a href="/contact" id="nav-hover">Contact Us</a></li>
+            <li><a href="/login" id="nav-hover">Login</a></li>
+        </ul>
+
+        <ul class="left-tabs">
+            <li><a href="/"><img src="/static/logo.png"></a></li>
+            <li><a href="/">EduStore</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Contact Us</h1>
+        <h2>Thank you for contacting us. We real reach out to you soon.</h2>
+        {% if success %}
+            <script>
+                document.querySelector("h2").style.visibility = "visible";
+            </script>
+        {% endif %}
+        <form action="/contact" method="POST">
+            <div class="input-field">
+                <input type="text" name="name" required>
+                <label>Enter your name</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" name="email" required>
+                <label>Enter your email</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" name="district" required>
+                <label>Enter your school district</label>
+            </div>
+
+            <select name="country" required>
+                <optgroup label="Select your country">
+                    <option value="USA">USA</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Canada">Canada</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Other">Other</option>
+                </optgroup>
+            </select>
+
+            <button type="submit"><span></span>Send</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    leftTabs = document.querySelector(".left-tabs");
+    leftTabs.addEventListener("mouseover", function(e) {
+        leftTabs.style.cursor = "pointer";
+    });
+
+    leftTabs.addEventListener("click", function(e) {
+        window.location.href = "/";
+    });
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Montserrat;
+    }
+
+    body {
+        background-color: rgb(26, 26, 29);
+    }
+
+    nav {
+        width: 100vw;
+        height: 80px;
+        padding: 25px 0;
+    }
+
+    .right-tabs {
+        float: right;
+        margin-right: 50px;
+    }
+
+    .left-tabs {
+        float: left;
+        margin-left: 50px;
+    }
+
+    nav ul li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 25px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.2vw;
+        position: relative;
+    }
+
+    nav ul li img {
+        width: 5vw;
+        position: relative;
+        top: .5vw;
+    }
+
+    #nav-hover::after {
+        content: '';
+        height: 3px;
+        width: 0;
+        background-color:#06306c ;
+        position: absolute;
+        left: 0;
+        bottom:-10px ;
+        transition-duration:.5s ;
+    }
+
+    #nav-hover:hover::after {
+        width: 100%;
+    }
+
+    .content {
+        width: 45vw;
+        height: 50vh;
+        border: 2px solid white;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .content h1 {
+        text-align: center;
+        padding-top: 1vw;
+        font-size: 2vw;
+        color: white;
+    }
+
+    .content h2 {
+        text-align: center;
+        font-size: 0.9vw;
+        padding-bottom: 0.5vw;
+        font-weight: 400;
+        color: rgb(120, 214, 120);
+        margin: 0 60px;
+        visibility: hidden;
+    }
+
+    .content form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .input-field {
+        position: relative;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 2.5vw;
+    }
+
+    .input-field label {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 0.9vw;
+        pointer-events: none;
+        transition: 0.15s ease;
+    }
+
+    .input-field input {
+        color: #fff;
+        width: 100%;
+        height: 40px;
+        outline: none;
+        background: transparent;
+        border: none;
+        font-size: 0.9vw;
+    }
+
+    .input-field input:focus~label,
+    .input-field input:valid~label {
+        font-size: 0.65vw;
+        top: 10px;
+        transform: translateY(-120%);
+    }
+
+    select {
+        width: 100%;
+        height: 40px;
+        outline: none;
+        background: transparent;
+        border: none;
+        font-size: 0.9vw;
+        color: #fff;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 2.5vw;
+    }
+
+    optgroup {
+        color: #000;
+        font: 0.9vw;
+        font-family: Montserrat;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px 0;
+        font-size: 1vw;
+        border-radius: 50px;
+        font-weight: bold;
+        border: 2px solid #06306c;
+        background-color: transparent;
+        color: #fff;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        left: 100%;
+        transform: translateX(-100%);
+    }
+
+    span {
+        background-color: #06306c;
+        height: 100%;
+        width: 0;
+        border-radius: 25px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        transition-duration: .5s;
+    }
+
+    button:hover span{
+        width: 100%;
+    }
+</style>

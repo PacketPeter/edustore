@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Welcome to the {{ district_name }} EduStore!<br><br>You are logged in with the initials {{ initials }}{{ admin }}
+        </h1>
+        <br>
+        <div class="button-div">
+            <a class="button" href="/logout">Logout</a>
+            {% if is_admin %}
+                <a class="button" href="/additions">Add Items</a>
+                <a class="button" href="/master-count">View Item Counts</a>
+            {% endif %}
+        </div>
+
+        {% if success_message %}
+            <h2 class="success-message">
+                {{ success_message }}
+            </h2>
+        {% endif %}
+        {% if error_message %}
+            <h2 class="error-message">
+                {{ error_message }}
+                {% if specialized_error %}
+                    <a class="specialized_error" href="/add-new-item">here</a>.
+                {% endif %}
+            </h2>
+        {% endif %}
+    </div>
+    <!--
+        Make an input field that is invisible and covers the whole screen
+        When ever a barcode gets scanned, the JS will submit the form so that you can
+        begin removing items
+    -->
+    <form action="/scan" method="POST" id="scanForm">
+        <input type="text" name="scan" id="scan" autofocus>
+    </form>
+</body>
+</html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(26, 26, 29)
+    }
+    .container {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 50vw;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .button-div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .button{
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: white;
+        margin: 0 0.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .button:hover {
+        color: #ccc;
+        background-color: #333;
+    }
+
+    .success-message {
+        color: rgb(120, 214, 120);
+        font-size: 1.5rem;
+        position: absolute;
+        bottom: 5vh;
+        z-index: 1;
+    }
+
+    .error-message {
+        color: rgb(114, 53, 53);
+        font-size: 1.5rem;
+        position: absolute;
+        bottom: 5vh;
+        z-index: 1;
+    }
+
+    .specialized_error {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .specialized_error:hover {
+        text-decoration: underline;
+    }
+
+    input {
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+</style>
+
+<script>
+    // If a number is typed in, focus on the scan input
+    document.addEventListener("keydown", function(e) {
+        if (!isNaN(e.key)) {
+            document.getElementById("scan").focus();
+        }
+    });
+
+    // If a letter is typed in, clear the input field
+    document.addEventListener("keydown", function(e) {
+        if (isNaN(e.key)) {
+            document.getElementById("scan").value = "";
+        }
+    });
+
+    // Once 6 consecutive numbers are in the input, submit it
+    document.getElementById("scan").addEventListener("input", function(e) {
+        if (e.target.value.length == 6) {
+            document.getElementById("scanForm").submit();
+        }
+    });
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Barcode</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Enter the barcode for this new product (EX: 123456)</h1>
+        <form action="/additions" method="post" onsubmit="event.preventDefault(); checkForm();">
+            <!-- Create invisible inputs to hold the part name, manufacturer, purchase order, count, and price -->
+            <input type="hidden" name="part_name" value="{{ part_name }}">
+            <input type="hidden" name="manufacturer" value="{{ manufacturer }}">
+            <input type="hidden" name="purchase_order" value="{{ purchase_order }}">
+            <input type="hidden" name="count" value="{{ count }}">
+            <input type="hidden" name="price" value="{{ price }}">
+            <input type="text" name="barcode" placeholder="Enter the barcode" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(26, 26, 29);
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    h1 {
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    input {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.5rem;
+    }
+</style>
+
+<script>
+    function checkForm(){
+        let number = document.querySelector('input[name="barcode"]').value;
+        // Make sure that it contains ONLY 6 numbers
+        if (number.length != 6 || isNaN(number)) {
+            alert("Please enter a 6 digit number as that is the barcode format");
+            return false;
+        } else {
+            // If it is a 6 digit number, submit the form
+            document.querySelector('form').submit();
+        }
+    }
+</script>

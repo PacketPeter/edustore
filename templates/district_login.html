@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Name</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <div class="container">
+        <img src="/static/logo.png" width="200px">
+        <h1>Mansfield ISD EduStore</h1>
+        <h1>Continue with your initials</h1>
+        <form action="/district_login" method="post" onsubmit="event.preventDefault(); checkForm();">
+            <input type="text" name="initials" placeholder="Enter your initials" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <p>Initials entered are not associated with an account, please try again.</p>
+    {% if error %}
+        <script>
+            document.querySelector('p').style.visibility = 'visible';
+        </script>
+    {% endif %}
+</body>
+</html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(26, 26, 29);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 93vh;
+    }
+
+    h1 {
+        color: white;
+        font-size: 1.25vw;
+        margin-bottom: 1vw;
+    }
+
+    input {
+        padding: 0.75vw;
+        margin-bottom: 0.75vw;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1vw;
+    }
+
+    p {
+        color: rgb(255, 129, 129);
+        font-size: 1vw;
+        text-align: center;
+        bottom: 0;
+        visibility: hidden;
+    }
+</style>
+
+<script>
+    function checkForm(){
+        let name = document.querySelector('input[name="initials"]').value;
+        // Make sure that name only contains letters and no symbols
+        if(!/^[a-zA-Z]+$/.test(name)){
+            alert('Your initials can only contain letters');
+        } else if((name.length > 0) && (name.length < 2)){
+            alert('You must enter your initials');
+        } else if(name.length > 2) {
+            alert('Only your first and last initials are required (EX: PM)');
+        } else {
+            document.querySelector('form').submit();
+        }
+    }
+</script>

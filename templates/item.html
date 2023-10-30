@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Page</title>
+
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+</head>
+<body>
+    <a href="/home">Click Me To Go Back Home</a>
+    <div class="container">
+        {% if file_exists %}
+            <img src="/static/{{ barcode }}.png">
+        {% else %}
+            <img src="/static/no-image.png">
+        {% endif %}
+        <h1>Part Name: {{ part_name }}</h1>
+
+        <!-- Create a form that will accept integer inputs only -->
+        <form action="/removals" method="POST">
+            <input type="hidden" name="part_name" value="{{ part_name }}">
+            <input id="quantity" type="number" name="quantity" placeholder="Number of items" min="1" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <!--
+        Make an input field that is invisible and covers the whole screen
+        When ever a barcode gets scanned, the JS will submit the form so that you can
+        begin removing items
+    -->
+</body>
+</html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(26, 26, 29)
+    }
+
+    a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        position: relative;
+        top: 2rem;
+    }
+
+    a:hover {
+        color: #ccc;
+    }
+
+    .container {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 75vw;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    img {
+        width: 25%;
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    /* The input with the name of submit should be on top of everything else */
+    input[type="submit"] {
+        position: relative;
+        z-index: 1;
+    }
+    /* On hover, darken the button */
+    input[type="submit"]:hover {
+        cursor: pointer;
+        background-color: #ccc;
+    }
+
+    input {
+        padding: 0.5rem;
+        margin: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: rgb(26, 26, 29);
+        color: black;
+        font-size: 2rem;
+        background-color: white;
+    }
+</style>
+
+<script>
+    // If anything is typed, focus on the quantity input
+    document.addEventListener("keydown", function(e) {
+        document.getElementById("quantity").focus();
+    });
+</script>

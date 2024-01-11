@@ -3,7 +3,7 @@
 
 # EduStore - Inventory management for the modern school district
 
-## Submission for the 2023 Congression App Challenge
+## Winning submission for the 2023 Congression App Challenge
 
 ## Created by Me, [Nick](https://github.com/packetnick), and [Peter](https://github.com/ptr06). View site at https://edustore.pkrm.dev
 
